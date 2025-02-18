@@ -7,9 +7,9 @@ The Movie Rental App is a React Native application that allows users to browse a
 ## Features
 
 - Three Screens:
-  Home Screen – Displays a list of available movies.
-  Movie Details Screen – Shows detailed information about a selected movie.
-  Rental Screen – Manages rented movies.
+  Home Screen: Search for movies via TMDB API and browse a scrollable list of movie cards.
+  Rented Screen: View a list of rented movies in a scrollable layout.
+  Watch Screen: Watch a placeholder video and mark movies as watched to remove them from the rented list.
 
 - Two Dialogs: Confirmation dialogs for renting and returning movies.
 
