@@ -11,7 +11,7 @@ The Movie Rental App is a React Native application that allows users to browse a
   Rented Screen: View a list of rented movies in a scrollable layout.
   Watch Screen: Watch a placeholder video and mark movies as watched to remove them from the rented list.
 
-- Two Dialogs: Confirmation dialogs for renting and returning movies.
+- Two Dialogs: Rent Confirmation (movie title, price, confirm/cancel) and Search Dialog (input and submit button).
 
 - Global Theme: Consistent styling throughout the app.
 
