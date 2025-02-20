@@ -2,7 +2,6 @@ import { createContext, useState, useEffect } from "react";
 
 export const SearchContext = createContext();
 
-const ApiKey = "1d58c62fd7995a27493981eaf6e63e96";
 const BASE_URl = "https://api.themoviedb.org/3/search/movie";
 const options = {
   method: "GET",
@@ -33,8 +32,16 @@ export function SearchProvider({ children }) {
     }
   }
 
+  function removeMovieFromSearchList(id) {
+    setMoviesData((prevMovieData) =>
+      prevMovieData.filter((item) => item.id != id)
+    );
+  }
+
   return (
-    <SearchContext.Provider value={{ moviesData, fetchMovies }}>
+    <SearchContext.Provider
+      value={{ moviesData, fetchMovies, removeMovieFromSearchList }}
+    >
       {children}
     </SearchContext.Provider>
   );
