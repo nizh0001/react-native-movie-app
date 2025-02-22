@@ -1,16 +1,23 @@
-import { FlatList, View } from "react-native";
-import { StorageContext } from "../context/StorageContext";
-import { useContext } from "react";
+import { FlatList, View, Button } from "react-native";
+import { useStorage } from "../context/StorageContext";
+import { useContext, useLayoutEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { useNavigation } from "@react-navigation/native";
 
 export default function RentedScreen() {
-  const { savedMovies } = useContext(StorageContext);
+  const { savedMovies } = useStorage();
 
   const nav = useNavigation();
+
   function handleWatchMovie(routeName, id) {
     nav.navigate(routeName, { id: id });
   }
+
+  useLayoutEffect(() => {
+    nav.setOptions({
+      headerBackTitle: "Search", // Shows "Search" next to the back arrow
+    });
+  }, [nav]);
 
   return (
     <View>

@@ -1,9 +1,19 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useContext } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const storageKey = "movies";
 
 export const StorageContext = createContext();
+
+export function useStorage() {
+  const context = useContext(StorageContext);
+
+  if (!context) {
+    throw new Error("useStorage must be used within a StorageProvider");
+  }
+
+  return context;
+}
 
 export function StorageProvider({ children }) {
   const [savedMovies, setSavedMovies] = useState([]);
