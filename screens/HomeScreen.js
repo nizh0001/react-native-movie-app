@@ -41,7 +41,7 @@ export default function HomeScreen() {
           keyExtractor={(item) => item.id.toString()}
           renderItem={(item) => (
             <MovieCard
-              image={`https://image.tmdb.org/t/p/w300${item.item.poster_path}`}
+              image={item.item.poster_path}
               title={item.item.title}
               releaseDate={item.item.release_date}
               buttonTitle="Rent"

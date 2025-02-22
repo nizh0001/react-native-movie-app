@@ -10,7 +10,10 @@ export default function MovieCard({
   return (
     <View>
       <View>
-        <Image source={{ uri: image }} style={{ width: 200, height: 300 }} />
+        <Image
+          source={{ uri: `https://image.tmdb.org/t/p/w300${image}` }}
+          style={{ width: 200, height: 300 }}
+        />
       </View>
       <Text>{title}</Text>
       <Text>{releaseDate}</Text>

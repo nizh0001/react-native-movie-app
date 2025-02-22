@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState } from "react";
 
 export const SearchContext = createContext();
 
@@ -25,7 +25,6 @@ export function SearchProvider({ children }) {
       }
 
       const data = await response.json();
-      console.log(data);
       setMoviesData(data.results);
     } catch (err) {
       console.log(err);

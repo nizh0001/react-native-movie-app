@@ -1,11 +1,21 @@
-import { Modal, TextInput, Button, Text, View, StyleSheet } from "react-native";
-import { useState, useEffect, useContext } from "react";
+import { Modal, Button, Text, View, StyleSheet } from "react-native";
 import { SearchContext } from "../context/SearchContext";
+import { StorageContext } from "../context/StorageContext";
+import { useContext } from "react";
 
 export default function RentModal({ visible, onClose, id }) {
-  const { removeMovieFromSearchList } = useContext(SearchContext);
+  const { removeMovieFromSearchList, moviesData } = useContext(SearchContext);
+  const { saveMovieToStorage } = useContext(StorageContext);
 
   function handleRentMovie() {
+    const rentedMovie = moviesData.find((item) => item.id == id);
+
+    if (!rentedMovie) {
+      console.error("Movie not found");
+      return;
+    }
+
+    saveMovieToStorage(rentedMovie);
     removeMovieFromSearchList(id);
     onClose();
   }
