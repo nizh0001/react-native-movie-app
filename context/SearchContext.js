@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useContext } from "react";
 
 export const SearchContext = createContext();
 
@@ -11,6 +11,16 @@ const options = {
       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZDU4YzYyZmQ3OTk1YTI3NDkzOTgxZWFmNmU2M2U5NiIsIm5iZiI6MTcxMDc5ODMxMi4yNDYsInN1YiI6IjY1ZjhiNWU4MzdiM2E5MDE2NGNjNjJhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pg2C0LVfMH3NvoqluNPJEtSiLkeJuNtZ4NxpBxNDao4",
   },
 };
+
+export function useSearch() {
+  const context = useContext(SearchContext);
+
+  if (!context) {
+    throw new Error("useSearch must be used within a SearchProvider");
+  }
+
+  return context;
+}
 export function SearchProvider({ children }) {
   const [moviesData, setMoviesData] = useState([]);
 

@@ -1,11 +1,11 @@
-import { Modal, Button, Text, View, StyleSheet } from "react-native";
-import { SearchContext } from "../context/SearchContext";
-import { StorageContext } from "../context/StorageContext";
-import { useContext } from "react";
+import { Button, Text, View, StyleSheet } from "react-native";
+import { useSearch } from "../context/SearchContext";
+import { useStorage } from "../context/StorageContext";
+import { Dialog } from "@rneui/themed";
 
 export default function RentModal({ visible, onClose, id }) {
-  const { removeMovieFromSearchList, moviesData } = useContext(SearchContext);
-  const { saveMovieToStorage } = useContext(StorageContext);
+  const { removeMovieFromSearchList, moviesData } = useSearch();
+  const { saveMovieToStorage } = useStorage();
 
   function handleRentMovie() {
     const rentedMovie = moviesData.find((item) => item.id == id);
@@ -21,51 +21,26 @@ export default function RentModal({ visible, onClose, id }) {
   }
 
   return (
-    <Modal visible={visible} transparent animationType="fade">
-      <View style={styles.modalContainer}>
-        <View style={styles.modalContent}>
-          <Text style={styles.title}>Rent movie for 10 $</Text>
-          <View style={styles.buttonContainer}>
-            <Button title="Close" color="red" onPress={onClose} />
-            <Button title="Rent" onPress={handleRentMovie} />
-          </View>
-        </View>
+    <Dialog isVisible={visible} onBackdropPress={onClose}>
+      <Dialog.Title title="Rent Movie" />
+      <Text style={styles.text}>Rent this movie for $10?</Text>
+      <View style={styles.buttonContainer}>
+        <Button title="Cancel" color="red" onPress={onClose} />
+        <Button title="Rent" onPress={handleRentMovie} />
       </View>
-    </Modal>
+    </Dialog>
   );
 }
 
 const styles = StyleSheet.create({
-  modalContainer: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
-  },
-  modalContent: {
-    width: 300,
-    padding: 20,
-    backgroundColor: "white",
-    borderRadius: 10,
-    alignItems: "center",
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: "bold",
+  text: {
+    fontSize: 16,
+    textAlign: "center",
     marginBottom: 10,
-  },
-  input: {
-    width: "100%",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    borderRadius: 5,
   },
   buttonContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
-    width: "100%",
+    marginTop: 10,
   },
 });

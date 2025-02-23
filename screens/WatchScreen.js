@@ -1,4 +1,4 @@
-import { Text, Button, View, Dimensions } from "react-native";
+import { Text, View } from "react-native";
 import { useRoute } from "@react-navigation/native";
 import { useStorage } from "../context/StorageContext";
 import { useNavigation } from "@react-navigation/native";
@@ -6,6 +6,8 @@ import { useVideoPlayer, VideoView } from "expo-video";
 import { useRef, useEffect, useState } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useEvent } from "expo";
+import { Button } from "@rneui/base";
+import { Icon } from "@rneui/base";
 
 const videoSrc =
   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -73,6 +75,9 @@ export default function WatchScreen() {
         <Button
           title="Mark as watched"
           onPress={() => handleMarkingAsWatched(movieToWatch.id)}
+          icon={
+            <Icon name="done" color="#ffffff" iconStyle={{ marginRight: 10 }} />
+          }
         />
       )}
     </View>
