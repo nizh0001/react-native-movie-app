@@ -1,6 +1,6 @@
 import { FlatList, View, Button } from "react-native";
 import { useStorage } from "../context/StorageContext";
-import { useContext, useLayoutEffect } from "react";
+import { useLayoutEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,7 +15,7 @@ export default function RentedScreen() {
 
   useLayoutEffect(() => {
     nav.setOptions({
-      headerBackTitle: "Search", // Shows "Search" next to the back arrow
+      headerBackTitle: "Search",
     });
   }, [nav]);
 
