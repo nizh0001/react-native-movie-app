@@ -50,11 +50,7 @@ export default function WatchScreen() {
 
   function handleMarkingAsWatched(id) {
     deleteMovieFromStorage(id);
-    nav.navigate("Rented");
-    nav.reset({
-      index: 1,
-      routes: [{ name: "Search" }, { name: "Rented" }],
-    });
+    nav.goBack();
   }
 
   useLayoutEffect(() => {
