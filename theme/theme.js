@@ -71,6 +71,22 @@ export const theme = createTheme({
         marginRight: 10,
       },
     },
+
+    DialogTitle: {
+      titleStyle: {
+        textAlign: "center",
+        fontFamily: "fontBold",
+        fontSize: 18,
+        padding: 8,
+      },
+    },
+
+    DialogButton: {
+      titleStyle: {
+        fontFamily: "fontRegular",
+        fontSize: 18,
+      },
+    },
   },
   darkColors: {
     background: "#2A004E",
@@ -80,7 +96,7 @@ export const theme = createTheme({
   lightColors: {
     background: "#D2E0FB",
     primary: "#4F1787",
-    secondary: "#C63C51",
+    secondary: "#F95454",
   },
 });
 
@@ -118,7 +134,6 @@ export const styles = StyleSheet.create({
     textAlign: "center",
     padding: 24,
   },
-
   topText: {
     fontFamily: "fontRegular",
     fontSize: 18,
@@ -129,14 +144,12 @@ export const styles = StyleSheet.create({
     fontFamily: "fontBold",
     color: theme.lightColors.secondary,
   },
-
   nameTopText: {
     fontFamily: "fontRegular",
     fontSize: 16,
     textAlign: "left",
     marginTop: 16,
   },
-
   nameBoldTopText: {
     fontFamily: "fontBold",
     fontSize: 18,
@@ -144,9 +157,9 @@ export const styles = StyleSheet.create({
   video: {
     width: 350,
     height: 250,
-    borderRadius: 16, // Round corners
-    overflow: "hidden", // Ensure borderRadius applies (may not work on all platforms)
-    backgroundColor: "#000", // Helps
+    borderRadius: 16,
+    overflow: "hidden",
+    backgroundColor: "#000",
   },
 
   videoContainer: {
@@ -154,5 +167,24 @@ export const styles = StyleSheet.create({
     overflow: "hidden",
     backgroundColor: "#000",
     marginVertical: 24,
+  },
+  textDialog: {
+    fontSize: 16,
+    textAlign: "left",
+    marginBottom: 10,
+  },
+  buttonContainerDialog: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+  },
+  inputDialog: {
+    width: "100%",
+    height: 40,
+    borderWidth: 1,
+    borderColor: "#ccc",
+    paddingHorizontal: 10,
+    marginBottom: 10,
+    borderRadius: 5,
   },
 });

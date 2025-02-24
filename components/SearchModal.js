@@ -1,11 +1,14 @@
-import { TextInput, Button, View, StyleSheet } from "react-native";
+import { TextInput, View } from "react-native";
 import { useState } from "react";
 import { useSearch } from "../context/SearchContext";
 import { Dialog } from "@rneui/themed";
+import { styles } from "../theme/theme";
+import { useTheme } from "@rneui/themed";
 
 export default function SearchModal({ visible, onClose }) {
   const { fetchMovies } = useSearch();
   const [query, setQuery] = useState("");
+  const { theme } = useTheme();
 
   function handleSearch() {
     if (query.trim()) {
@@ -19,30 +22,20 @@ export default function SearchModal({ visible, onClose }) {
       <Dialog.Title title="Search Movies" />
       <TextInput
         onChangeText={setQuery}
-        style={styles.input}
+        style={styles.inputDialog}
         placeholder="Enter movie name"
       />
-      <View style={styles.buttonContainer}>
-        <Button title="Cancel" color="red" onPress={onClose} />
-        <Button title="Search" onPress={handleSearch} />
+      <View style={styles.buttonContainerDialog}>
+        <Dialog.Button
+          title="Cancel" // This remains the same
+          titleStyle={{ color: theme.colors.secondary }} // This remains the same
+          onPress={onClose} // This remains the same
+        />
+        <Dialog.Button
+          title="Search" // Updated this line to directly pass the `title` prop
+          onPress={handleSearch} // Directly passing the onPress prop, no change needed here
+        />
       </View>
     </Dialog>
   );
 }
-
-const styles = StyleSheet.create({
-  input: {
-    width: "100%",
-    height: 40,
-    borderWidth: 1,
-    borderColor: "#ccc",
-    paddingHorizontal: 10,
-    marginBottom: 10,
-    borderRadius: 5,
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginTop: 10,
-  },
-});

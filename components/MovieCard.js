@@ -1,7 +1,5 @@
 import React from "react";
 import { Text, Card, Button } from "@rneui/themed";
-import { styles } from "../theme/theme";
-import { View } from "react-native";
 
 export default function MovieCard({
   icon,
