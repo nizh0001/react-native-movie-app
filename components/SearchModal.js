@@ -4,12 +4,10 @@ import { useSearch } from "../context/SearchContext";
 import { Dialog } from "@rneui/themed";
 import { Button } from "@rneui/base";
 import { styles } from "../theme/theme";
-import { useTheme } from "@rneui/themed";
 
 export default function SearchModal({ visible, onClose }) {
   const { fetchMovies } = useSearch();
   const [query, setQuery] = useState("");
-  const { theme } = useTheme();
 
   function handleSearch() {
     if (query.trim()) {

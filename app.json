@@ -4,18 +4,24 @@
     "slug": "react-native-app-project",
     "version": "1.0.0",
     "orientation": "default",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/images/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "splash": {
-      "image": "./assets/splash-icon.png",
+      "image": "./assets/icons/splash-icon-dark.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },
     "ios": {
       "supportsTablet": true,
-      "requireFullScreen": true
+      "requireFullScreen": true,
+      "icon": {
+        "dark": "./assets/icons/dark.png",
+        "light": "./assets/icons/light.png",
+        "tint": "./assets/icons/tinted.png"
+      }
     },
+    
     "plugins": [
       [
         "expo-video",
@@ -29,12 +35,28 @@
        {
         "fonts": ["./assets/fonts/Ubuntu-Regular.ttf", "./assets/fonts/Ubuntu-Medium.ttf", "./assets/fonts/Ubuntu-Bold.ttf"]
       }
+    ],
+
+    [
+      "expo-splash-screen",
+      {
+        "image": "./assets/icons/splash-icon-dark.png",
+        "imageWidth": 200,
+        "resizeMode": "contain",
+        "backgroundColor": "#ffffff",
+        "dark":{
+          "image":"./assets/icons/splash-icon-light.png",
+          "backgroundColor": "#222222"
+        }
+      }
     ]
+
     ],
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "foregroundImage": "./assets/icons/adaptive-icon.png",
+        "monochromeImage": "./assets/icons/adaptive-icon.png",
+         "backgroundColor": "#ffffff"
       }
     },
     "web": {

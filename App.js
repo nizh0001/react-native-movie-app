@@ -16,6 +16,10 @@ import WatchScreen from "./screens/WatchScreen";
 import { ThemeProvider } from "@rneui/themed";
 import { theme } from "./theme/theme";
 import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { useEffect } from "react";
+
+SplashScreen.preventAutoHideAsync();
 
 const Stack = createNativeStackNavigator();
 
@@ -23,15 +27,21 @@ export default function App() {
   const [fontsLoaded] = useFonts({
     fontRegular: require("./assets/fonts/Ubuntu-Regular.ttf"),
     fontBold: require("./assets/fonts/Ubuntu-Bold.ttf"),
-    fontMedium: require("./assets/fonts/Ubuntu-Medium.ttf"),
   });
+
+  useEffect(() => {
+    if (fontsLoaded) {
+      SplashScreen.hideAsync();
+    }
+  }, [fontsLoaded]);
 
   if (!fontsLoaded) {
     return null;
   }
+
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="auto" />
       <ThemeProvider theme={theme}>
         <SearchProvider>
           <StorageProvider>
