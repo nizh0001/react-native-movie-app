@@ -1,14 +1,13 @@
-import { Text, View, StyleSheet } from "react-native";
+import { Text, View } from "react-native";
 import { useSearch } from "../context/SearchContext";
 import { useStorage } from "../context/StorageContext";
 import { Dialog } from "@rneui/themed";
-import { useTheme } from "@rneui/themed";
+import { Button } from "@rneui/base";
 import { styles } from "../theme/theme";
 
 export default function RentModal({ visible, onClose, id }) {
   const { removeMovieFromSearchList, moviesData } = useSearch();
   const { saveMovieToStorage } = useStorage();
-  const { theme } = useTheme();
 
   function handleRentMovie() {
     const rentedMovie = moviesData.find((item) => item.id == id);
@@ -29,12 +28,18 @@ export default function RentModal({ visible, onClose, id }) {
       <Text style={styles.textDialog}>Rental Price: $10</Text>
       <Text style={styles.textDialog}>Would you like to rent this movie?</Text>
       <View style={styles.buttonContainerDialog}>
-        <Dialog.Button
+        <Button
           title="Cancel"
-          titleStyle={{ color: theme.colors.secondary }}
+          titleStyle={styles.buttonCancelStyle}
           onPress={onClose}
+          type="clear"
         />
-        <Dialog.Button title="Confirm" onPress={handleRentMovie} />
+        <Button
+          title="Confirm"
+          onPress={handleRentMovie}
+          type="clear"
+          titleStyle={styles.buttonOkStyle}
+        />
       </View>
     </Dialog>
   );

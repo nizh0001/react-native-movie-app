@@ -2,6 +2,7 @@ import { TextInput, View } from "react-native";
 import { useState } from "react";
 import { useSearch } from "../context/SearchContext";
 import { Dialog } from "@rneui/themed";
+import { Button } from "@rneui/base";
 import { styles } from "../theme/theme";
 import { useTheme } from "@rneui/themed";
 
@@ -26,14 +27,17 @@ export default function SearchModal({ visible, onClose }) {
         placeholder="Enter movie name"
       />
       <View style={styles.buttonContainerDialog}>
-        <Dialog.Button
-          title="Cancel" // This remains the same
-          titleStyle={{ color: theme.colors.secondary }} // This remains the same
-          onPress={onClose} // This remains the same
+        <Button
+          title="Cancel"
+          titleStyle={styles.buttonCancelStyle}
+          onPress={onClose}
+          type="clear"
         />
-        <Dialog.Button
-          title="Search" // Updated this line to directly pass the `title` prop
-          onPress={handleSearch} // Directly passing the onPress prop, no change needed here
+        <Button
+          title="Search"
+          onPress={handleSearch}
+          type="clear"
+          titleStyle={styles.buttonOkStyle}
         />
       </View>
     </Dialog>

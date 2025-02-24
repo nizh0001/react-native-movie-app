@@ -186,5 +186,16 @@ export const styles = StyleSheet.create({
     paddingHorizontal: 10,
     marginBottom: 10,
     borderRadius: 5,
+    fontFamily: "fontRegular",
+  },
+  buttonCancelStyle: {
+    color: "#F95454",
+    fontFamily: "fontRegular",
+    fontSize: 18,
+  },
+  buttonOkStyle: {
+    color: "#4F1787",
+    fontFamily: "fontRegular",
+    fontSize: 18,
   },
 });
