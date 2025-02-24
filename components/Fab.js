@@ -1,29 +1,17 @@
-import { Pressable, Text, StyleSheet } from "react-native";
+import { Pressable } from "react-native";
+import { Icon } from "@rneui/base";
+import { styles } from "../theme/theme";
 
-export default function Fab({ onPress, title }) {
+export default function Fab({ onPress }) {
   return (
-    <Pressable style={styles.container} onPress={onPress}>
-      <Text style={styles.title}>{title}</Text>
+    <Pressable style={styles.fab} onPress={onPress}>
+      <Icon
+        name="search"
+        type="material"
+        size={28}
+        color={"white"}
+        style={{ margin: 0, padding: 0 }}
+      />
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    position: "absolute",
-    bottom: 40,
-    right: 40,
-    backgroundColor: "#26653A",
-    borderRadius: 50, // Circular shape
-    paddingVertical: 12, // Add padding
-    paddingHorizontal: 20, // Add padding
-    alignItems: "center",
-    justifyContent: "center",
-    minWidth: 60, // Ensure visibility
-  },
-  title: {
-    fontSize: 18,
-    color: "#fff",
-    fontWeight: "bold",
-  },
-});

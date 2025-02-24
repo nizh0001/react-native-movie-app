@@ -7,6 +7,7 @@ import { useSearch } from "../context/SearchContext";
 import MovieCard from "../components/MovieCard";
 import RentModal from "../components/RentModal";
 import { Icon } from "@rneui/themed";
+import { styles } from "../theme/theme";
 
 export default function HomeScreen() {
   const [visibleSearchModal, setVisibleSearchModal] = useState(false);
@@ -34,40 +35,40 @@ export default function HomeScreen() {
   }, [nav]);
 
   return (
-    <View style={{ flex: 1 }}>
-      <Text>Home/Search screen</Text>
-      {moviesData ? (
-        <FlatList
-          data={moviesData}
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={(item) => (
-            <MovieCard
-              icon={
-                <Icon
-                  name="movie"
-                  color="#ffffff"
-                  iconStyle={{ marginRight: 10 }}
-                />
-              }
-              image={item.item.poster_path}
-              title={item.item.title}
-              releaseDate={item.item.release_date}
-              buttonTitle="Rent"
-              onCardButtonPress={() => handleRentMovie(item.item.id)}
-            />
-          )}
-        />
+    <View style={styles.screenContainer}>
+      {moviesData.length > 0 ? (
+        <>
+          <Text style={styles.topText}>
+            You have{" "}
+            <Text style={styles.boldTopText}>{moviesData.length} </Text>
+            movie{moviesData.length !== 1 ? "s" : ""} available to rent
+          </Text>
+          <FlatList
+            data={moviesData}
+            keyExtractor={(item) => item.id.toString()}
+            renderItem={({ item }) => (
+              <MovieCard
+                icon={<Icon name="movie" />}
+                image={item.poster_path}
+                title={item.title}
+                releaseDate={item.release_date}
+                buttonTitle="Rent"
+                onCardButtonPress={() => handleRentMovie(item.id)}
+              />
+            )}
+          />
+        </>
       ) : (
-        <Text> No movies yet</Text>
+        <Text style={styles.welcomeText}>
+          Hello! Looking for a movie? Tap the search button
+        </Text>
       )}
-
       <RentModal
         visible={visibleRentModal}
         onClose={() => setVisibleRentModal(false)}
         id={selectedMovieId}
       />
-
-      <Fab onPress={handleSearchModal} title="Search" />
+      <Fab onPress={handleSearchModal} />
       <SearchModal
         visible={visibleSearchModal}
         onClose={() => setVisibleSearchModal(false)}

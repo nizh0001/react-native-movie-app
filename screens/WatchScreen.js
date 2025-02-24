@@ -6,8 +6,9 @@ import { useVideoPlayer, VideoView } from "expo-video";
 import { useRef, useEffect, useState } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useEvent } from "expo";
-import { Button } from "@rneui/base";
-import { Icon } from "@rneui/base";
+import { Button } from "@rneui/themed";
+import { Icon } from "@rneui/themed";
+import { styles } from "../theme/theme";
 
 const videoSrc =
   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -55,29 +56,28 @@ export default function WatchScreen() {
   }
 
   return (
-    <View
-      style={{ flex: 1, justifyContent: "flex-start", alignItems: "center" }}
-    >
+    <View style={styles.watchScreenContainer}>
       {!isPlaying && (
-        <Text style={{ marginBottom: 10 }}>
-          Now watching {movieToWatch.title}
+        <Text style={styles.nameTopText}>
+          Now watching:{" "}
+          <Text style={styles.nameBoldTopText}>"{movieToWatch.title}"</Text>
         </Text>
       )}
 
-      <VideoView
-        ref={vidView}
-        style={{ width: 300, height: 200 }}
-        allowsFullscreen
-        player={player}
-      />
+      <View style={styles.videoContainer}>
+        <VideoView
+          ref={vidView}
+          style={styles.video}
+          allowsFullscreen
+          player={player}
+        />
+      </View>
 
       {!isPlaying && (
         <Button
           title="Mark as watched"
           onPress={() => handleMarkingAsWatched(movieToWatch.id)}
-          icon={
-            <Icon name="done" color="#ffffff" iconStyle={{ marginRight: 10 }} />
-          }
+          icon={<Icon name="done" />}
         />
       )}
     </View>
