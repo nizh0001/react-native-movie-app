@@ -3,12 +3,13 @@ import { useRoute } from "@react-navigation/native";
 import { useStorage } from "../context/StorageContext";
 import { useNavigation } from "@react-navigation/native";
 import { useVideoPlayer, VideoView } from "expo-video";
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useEvent } from "expo";
 import { Button } from "@rneui/themed";
 import { Icon } from "@rneui/themed";
 import { styles } from "../theme/theme";
+import { useTheme } from "@rneui/themed";
 
 const videoSrc =
   "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4";
@@ -19,6 +20,7 @@ export default function WatchScreen() {
   const { savedMovies, deleteMovieFromStorage } = useStorage();
   const orientation = useDeviceOrientation();
   const [orient, setOrient] = useState("portrait");
+  const { theme } = useTheme();
 
   const movieToWatch = savedMovies.find((item) => item.id == id);
 
@@ -54,6 +56,16 @@ export default function WatchScreen() {
       routes: [{ name: "Search" }, { name: "Rented" }],
     });
   }
+
+  useLayoutEffect(() => {
+    nav.setOptions({
+      headerTintColor: theme.colors.primary,
+      headerTitleStyle: {
+        fontFamily: "fontBold",
+        fontSize: 18,
+      },
+    });
+  }, [nav]);
 
   return (
     <View style={styles.watchScreenContainer}>

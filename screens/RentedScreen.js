@@ -5,9 +5,11 @@ import MovieCard from "../components/MovieCard";
 import { useNavigation } from "@react-navigation/native";
 import { Icon } from "@rneui/themed";
 import { styles } from "../theme/theme";
+import { useTheme } from "@rneui/themed";
 
 export default function RentedScreen() {
   const { savedMovies } = useStorage();
+  const { theme } = useTheme();
 
   const nav = useNavigation();
 
@@ -18,6 +20,11 @@ export default function RentedScreen() {
   useLayoutEffect(() => {
     nav.setOptions({
       headerBackTitle: "Search",
+      headerTintColor: theme.colors.primary,
+      headerTitleStyle: {
+        fontFamily: "fontBold",
+        fontSize: 18,
+      },
     });
   }, [nav]);
 

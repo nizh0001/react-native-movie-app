@@ -95,7 +95,7 @@ export const theme = createTheme({
   },
   lightColors: {
     background: "#D2E0FB",
-    primary: "#4F1787",
+    primary: "#4335A7",
     secondary: "#F95454",
   },
 });
@@ -190,12 +190,16 @@ export const styles = StyleSheet.create({
   },
   buttonCancelStyle: {
     color: "#F95454",
-    fontFamily: "fontRegular",
+    fontFamily: "fontBold",
     fontSize: 18,
   },
   buttonOkStyle: {
-    color: "#4F1787",
-    fontFamily: "fontRegular",
+    color: "#4335A7",
+    fontFamily: "fontBold",
+    fontSize: 18,
+  },
+  homeTitle: {
+    fontFamily: "fontBold",
     fontSize: 18,
   },
 });

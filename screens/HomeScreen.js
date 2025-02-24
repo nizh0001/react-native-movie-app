@@ -1,4 +1,5 @@
-import { Text, Button, View, FlatList } from "react-native";
+import { Text, View, FlatList } from "react-native";
+import { Button } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect, useState } from "react";
 import SearchModal from "../components/SearchModal";
@@ -9,12 +10,14 @@ import RentModal from "../components/RentModal";
 import { Icon } from "@rneui/themed";
 import { styles } from "../theme/theme";
 import { ActivityIndicator } from "react-native";
+import { useTheme } from "@rneui/themed";
 
 export default function HomeScreen() {
   const [visibleSearchModal, setVisibleSearchModal] = useState(false);
   const [visibleRentModal, setVisibleRentModal] = useState(false);
   const { moviesData, loading, notFound } = useSearch();
   const [selectedMovieId, setSelectedMovieId] = useState(null);
+  const { theme } = useTheme();
 
   function handleSearchModal() {
     setVisibleSearchModal(true);
@@ -29,8 +32,18 @@ export default function HomeScreen() {
 
   useLayoutEffect(() => {
     nav.setOptions({
+      headerTitle: () => (
+        <Text style={styles.homeTitle}>Home</Text> // Customize the title
+      ),
       headerRight: () => {
-        return <Button title="Rented" onPress={() => nav.navigate("Rented")} />;
+        return (
+          <Button
+            type="clear"
+            titleStyle={styles.buttonOkStyle}
+            title="Rented"
+            onPress={() => nav.navigate("Rented")}
+          />
+        );
       },
     });
   }, [nav]);
@@ -38,7 +51,7 @@ export default function HomeScreen() {
   return (
     <View style={styles.screenContainer}>
       {loading ? (
-        <ActivityIndicator size="large" color="#5C258D" />
+        <ActivityIndicator size="large" color={theme.colors.primary} />
       ) : notFound ? (
         <Text style={styles.welcomeText}>No movies found for your search.</Text>
       ) : moviesData.length > 0 ? (
