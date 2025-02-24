@@ -21,11 +21,15 @@ export function useSearch() {
 
   return context;
 }
+
 export function SearchProvider({ children }) {
   const [moviesData, setMoviesData] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [notFound, setNotFound] = useState(false);
 
   async function fetchMovies(query) {
     try {
+      setLoading(true);
       const response = await fetch(
         `${BASE_URl}?query=${query}&include_adult=false&language=en-US&page=1`,
         options
@@ -33,11 +37,13 @@ export function SearchProvider({ children }) {
       if (!response.ok) {
         throw new Error(response.statusText);
       }
-
       const data = await response.json();
       setMoviesData(data.results);
+      setNotFound(data.results.length === 0);
     } catch (err) {
       console.log(err);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -49,7 +55,13 @@ export function SearchProvider({ children }) {
 
   return (
     <SearchContext.Provider
-      value={{ moviesData, fetchMovies, removeMovieFromSearchList }}
+      value={{
+        moviesData,
+        fetchMovies,
+        removeMovieFromSearchList,
+        loading,
+        notFound,
+      }}
     >
       {children}
     </SearchContext.Provider>

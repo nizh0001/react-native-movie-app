@@ -9,9 +9,13 @@ export default function MovieCard({
   buttonTitle,
   onCardButtonPress,
 }) {
+  const source =
+    image && image !== ""
+      ? { uri: `https://image.tmdb.org/t/p/w400${image}` }
+      : require("../assets/images/placeholder.png");
   return (
     <Card>
-      <Card.Image source={{ uri: `https://image.tmdb.org/t/p/w400${image}` }} />
+      <Card.Image source={source} />
       <Card.Title numberOfLines={1} ellipsizeMode="tail">
         {title}
       </Card.Title>

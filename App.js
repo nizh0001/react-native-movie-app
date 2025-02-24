@@ -1,10 +1,3 @@
-// Add comments in each function outlining their purpose.
-//Add a custom launcher Icon and Splashscreen image for your app.
-
-//Add, loaders, when needed,
-//Add placeholder for movies without image
-// changing header navigation style
-
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "react-native";

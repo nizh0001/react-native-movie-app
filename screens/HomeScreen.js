@@ -8,11 +8,12 @@ import MovieCard from "../components/MovieCard";
 import RentModal from "../components/RentModal";
 import { Icon } from "@rneui/themed";
 import { styles } from "../theme/theme";
+import { ActivityIndicator } from "react-native";
 
 export default function HomeScreen() {
   const [visibleSearchModal, setVisibleSearchModal] = useState(false);
   const [visibleRentModal, setVisibleRentModal] = useState(false);
-  const { moviesData } = useSearch();
+  const { moviesData, loading, notFound } = useSearch();
   const [selectedMovieId, setSelectedMovieId] = useState(null);
 
   function handleSearchModal() {
@@ -36,7 +37,11 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.screenContainer}>
-      {moviesData.length > 0 ? (
+      {loading ? (
+        <ActivityIndicator size="large" color="#5C258D" />
+      ) : notFound ? (
+        <Text style={styles.welcomeText}>No movies found for your search.</Text>
+      ) : moviesData.length > 0 ? (
         <>
           <Text style={styles.topText}>
             You have{" "}
