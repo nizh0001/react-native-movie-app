@@ -5,6 +5,7 @@ const storageKey = "movies";
 
 export const StorageContext = createContext();
 
+// Creating a custom hook for storage context
 export function useStorage() {
   const context = useContext(StorageContext);
 
@@ -23,12 +24,15 @@ export function StorageProvider({ children }) {
       const existingMovies = await AsyncStorage.getItem(storageKey);
       let movies = existingMovies ? JSON.parse(existingMovies) : [];
 
+      // to prevent saving the same movies in storage
       const isDuplicate = movies.some((m) => m.id === movie.id);
+
       if (isDuplicate) {
         console.warn("Movie already exists in storage.");
         return;
       }
 
+      // adding movie to the storage array
       movies.push(movie);
       await AsyncStorage.setItem(storageKey, JSON.stringify(movies));
 
@@ -39,6 +43,7 @@ export function StorageProvider({ children }) {
     }
   }
 
+  // getting movies from storage and saving it in state variable which will be used in rented and watch screen
   async function getMoviesFromStorage() {
     try {
       const strMovies = await AsyncStorage.getItem(storageKey);
@@ -51,6 +56,7 @@ export function StorageProvider({ children }) {
     }
   }
 
+  //deleting the movie from storage array and updating state variable savedMovies
   async function deleteMovieFromStorage(id) {
     try {
       const strMovies = await AsyncStorage.getItem(storageKey);

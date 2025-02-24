@@ -3,9 +3,8 @@ import { useStorage } from "../context/StorageContext";
 import { useLayoutEffect } from "react";
 import MovieCard from "../components/MovieCard";
 import { useNavigation } from "@react-navigation/native";
-import { Icon } from "@rneui/themed";
+import { Icon, useTheme } from "@rneui/themed";
 import { styles } from "../theme/theme";
-import { useTheme } from "@rneui/themed";
 
 export default function RentedScreen() {
   const { savedMovies } = useStorage();

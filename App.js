@@ -1,16 +1,16 @@
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { StatusBar } from "react-native";
-import HomeScreen from "./screens/HomeScreen";
-import RentedScreen from "./screens/RentedScreen";
 import { SearchProvider } from "./context/SearchContext";
 import { StorageProvider } from "./context/StorageContext";
-import WatchScreen from "./screens/WatchScreen";
 import { ThemeProvider } from "@rneui/themed";
 import { theme } from "./theme/theme";
 import { useFonts } from "expo-font";
-import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import WatchScreen from "./screens/WatchScreen";
+import HomeScreen from "./screens/HomeScreen";
+import RentedScreen from "./screens/RentedScreen";
+import * as SplashScreen from "expo-splash-screen";
 
 SplashScreen.preventAutoHideAsync();
 

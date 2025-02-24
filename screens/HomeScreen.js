@@ -1,16 +1,14 @@
-import { Text, View, FlatList } from "react-native";
+import { Text, View, FlatList, ActivityIndicator } from "react-native";
 import { Button } from "@rneui/base";
 import { useNavigation } from "@react-navigation/native";
 import { useLayoutEffect, useState } from "react";
-import SearchModal from "../components/SearchModal";
-import Fab from "../components/Fab";
 import { useSearch } from "../context/SearchContext";
+import { Icon, useTheme } from "@rneui/themed";
+import { styles } from "../theme/theme";
+import SearchModal from "../components/SearchModal";
 import MovieCard from "../components/MovieCard";
 import RentModal from "../components/RentModal";
-import { Icon } from "@rneui/themed";
-import { styles } from "../theme/theme";
-import { ActivityIndicator } from "react-native";
-import { useTheme } from "@rneui/themed";
+import Fab from "../components/Fab";
 
 export default function HomeScreen() {
   const [visibleSearchModal, setVisibleSearchModal] = useState(false);
@@ -32,9 +30,7 @@ export default function HomeScreen() {
 
   useLayoutEffect(() => {
     nav.setOptions({
-      headerTitle: () => (
-        <Text style={styles.homeTitle}>Home</Text> // Customize the title
-      ),
+      headerTitle: () => <Text style={styles.homeTitle}>Home</Text>,
       headerRight: () => {
         return (
           <Button

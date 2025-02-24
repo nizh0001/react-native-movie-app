@@ -12,6 +12,7 @@ const options = {
   },
 };
 
+// creating custom hook for search context
 export function useSearch() {
   const context = useContext(SearchContext);
 
@@ -27,6 +28,7 @@ export function SearchProvider({ children }) {
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
 
+  //fetching movies and saving in array moviesData
   async function fetchMovies(query) {
     try {
       setLoading(true);
@@ -39,7 +41,7 @@ export function SearchProvider({ children }) {
       }
       const data = await response.json();
       setMoviesData(data.results);
-      setNotFound(data.results.length === 0);
+      setNotFound(data.results.length === 0); // it will be use in home screen to display message if there is no search results
     } catch (err) {
       console.log(err);
     } finally {
@@ -47,6 +49,7 @@ export function SearchProvider({ children }) {
     }
   }
 
+  // removing the movie from array moviesData based on id of movie
   function removeMovieFromSearchList(id) {
     setMoviesData((prevMovieData) =>
       prevMovieData.filter((item) => item.id != id)

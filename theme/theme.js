@@ -20,6 +20,7 @@ export const theme = createTheme({
         borderRadius: 16,
       },
     },
+
     CardImage: {
       style: {
         width: "100%",
@@ -88,11 +89,13 @@ export const theme = createTheme({
       },
     },
   },
+
   darkColors: {
     background: "#2A004E",
     primary: "#D2E0FB",
     secondary: "#F95454",
   },
+
   lightColors: {
     background: "#D2E0FB",
     primary: "#4335A7",
@@ -128,32 +131,38 @@ export const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+
   welcomeText: {
     fontFamily: "fontRegular",
     fontSize: 20,
     textAlign: "center",
     padding: 24,
   },
+
   topText: {
     fontFamily: "fontRegular",
     fontSize: 18,
     padding: 16,
   },
+
   boldTopText: {
     fontSize: 24,
     fontFamily: "fontBold",
     color: theme.lightColors.secondary,
   },
+
   nameTopText: {
     fontFamily: "fontRegular",
     fontSize: 16,
     textAlign: "left",
     marginTop: 16,
   },
+
   nameBoldTopText: {
     fontFamily: "fontBold",
     fontSize: 18,
   },
+
   video: {
     width: 350,
     height: 250,
@@ -168,16 +177,19 @@ export const styles = StyleSheet.create({
     backgroundColor: "#000",
     marginVertical: 24,
   },
+
   textDialog: {
     fontSize: 16,
     textAlign: "left",
     marginBottom: 10,
   },
+
   buttonContainerDialog: {
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 10,
   },
+
   inputDialog: {
     width: "100%",
     height: 40,
@@ -188,16 +200,19 @@ export const styles = StyleSheet.create({
     borderRadius: 5,
     fontFamily: "fontRegular",
   },
+
   buttonCancelStyle: {
     color: "#F95454",
     fontFamily: "fontBold",
     fontSize: 18,
   },
+
   buttonOkStyle: {
     color: "#4335A7",
     fontFamily: "fontBold",
     fontSize: 18,
   },
+
   homeTitle: {
     fontFamily: "fontBold",
     fontSize: 18,

@@ -6,8 +6,7 @@ import { useVideoPlayer, VideoView } from "expo-video";
 import { useRef, useEffect, useState, useLayoutEffect } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useEvent } from "expo";
-import { Button } from "@rneui/themed";
-import { Icon } from "@rneui/themed";
+import { Button, Icon } from "@rneui/themed";
 import { styles } from "../theme/theme";
 import { useTheme } from "@rneui/themed";
 
@@ -18,28 +17,19 @@ export default function WatchScreen() {
   const route = useRoute();
   const { id } = route.params;
   const { savedMovies, deleteMovieFromStorage } = useStorage();
-  const orientation = useDeviceOrientation();
-  const [orient, setOrient] = useState("portrait");
   const { theme } = useTheme();
-
-  const movieToWatch = savedMovies.find((item) => item.id == id);
+  const [orient, setOrient] = useState("portrait");
+  const orientation = useDeviceOrientation();
+  const nav = useNavigation();
 
   const vidView = useRef(null);
-  const nav = useNavigation();
   const player = useVideoPlayer(videoSrc, (player) => {
     player.loop = false;
   });
+
   const { isPlaying } = useEvent(player, "playingChange", {
     isPlaying: player.playing,
   });
-
-  if (!movieToWatch) {
-    return (
-      <View>
-        <Text>Movie not found or already removed.</Text>
-      </View>
-    );
-  }
 
   useEffect(() => {
     setOrient(orientation);
@@ -63,11 +53,19 @@ export default function WatchScreen() {
     });
   }, [nav]);
 
+  const movieToWatch = savedMovies.find((item) => item.id == id); //finding selected movie from storage array to extract the title
+  if (!movieToWatch) {
+    return (
+      <View>
+        <Text>Movie not found or already removed.</Text>
+      </View>
+    );
+  }
   return (
     <View style={styles.watchScreenContainer}>
       {!isPlaying && (
         <Text style={styles.nameTopText}>
-          Now watching:{" "}
+          Now watching:
           <Text style={styles.nameBoldTopText}>"{movieToWatch.title}"</Text>
         </Text>
       )}
