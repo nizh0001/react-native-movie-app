@@ -8,12 +8,13 @@ import { styles } from "../theme/theme";
 import SearchModal from "../components/SearchModal";
 import MovieCard from "../components/MovieCard";
 import RentModal from "../components/RentModal";
+import ErrorModal from "../components/ErrorModal";
 import Fab from "../components/Fab";
 
 export default function HomeScreen() {
   const [visibleSearchModal, setVisibleSearchModal] = useState(false);
   const [visibleRentModal, setVisibleRentModal] = useState(false);
-  const { moviesData, loading, notFound } = useSearch();
+  const { moviesData, loading, notFound, error, clearError } = useSearch();
   const [selectedMovieId, setSelectedMovieId] = useState(null);
   const { theme } = useTheme();
 
@@ -81,6 +82,10 @@ export default function HomeScreen() {
         visible={visibleRentModal}
         onClose={() => setVisibleRentModal(false)}
         id={selectedMovieId}
+      />
+      <ErrorModal
+        visible={error}
+        onClose={clearError}
       />
       <Fab onPress={handleSearchModal} />
       <SearchModal

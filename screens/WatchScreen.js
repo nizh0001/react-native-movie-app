@@ -3,7 +3,7 @@ import { useRoute } from "@react-navigation/native";
 import { useStorage } from "../context/StorageContext";
 import { useNavigation } from "@react-navigation/native";
 import { useVideoPlayer, VideoView } from "expo-video";
-import { useRef, useEffect, useState, useLayoutEffect } from "react";
+import { useRef, useEffect, useLayoutEffect } from "react";
 import { useDeviceOrientation } from "@react-native-community/hooks";
 import { useEvent } from "expo";
 import { Button, Icon } from "@rneui/themed";
@@ -18,7 +18,6 @@ export default function WatchScreen() {
   const { id } = route.params;
   const { savedMovies, deleteMovieFromStorage } = useStorage();
   const { theme } = useTheme();
-  const [orient, setOrient] = useState("portrait");
   const orientation = useDeviceOrientation();
   const nav = useNavigation();
 
@@ -32,8 +31,7 @@ export default function WatchScreen() {
   });
 
   useEffect(() => {
-    setOrient(orientation);
-    if (orientation === "landscape") {
+    if (orientation === "landscape" && vidView.current) {
       vidView.current.enterFullscreen();
     }
   }, [orientation]);
@@ -53,7 +51,7 @@ export default function WatchScreen() {
     });
   }, [nav]);
 
-  const movieToWatch = savedMovies.find((item) => item.id == id); //finding selected movie from storage array to extract the title
+  const movieToWatch = savedMovies.find((item) => item.id === id); //finding selected movie from storage array to extract the title
   if (!movieToWatch) {
     return (
       <View>

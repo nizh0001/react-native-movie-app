@@ -10,7 +10,7 @@ export default function RentModal({ visible, onClose, id }) {
   const { saveMovieToStorage } = useStorage();
 
   function handleRentMovie() {
-    const rentedMovie = moviesData.find((item) => item.id == id);
+    const rentedMovie = moviesData.find((item) => item.id === id);
 
     if (!rentedMovie) {
       console.error("Movie not found");

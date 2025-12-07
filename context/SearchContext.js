@@ -1,14 +1,29 @@
-import { createContext, useState, useContext } from "react";
+import {
+  createContext,
+  useState,
+  useContext,
+} from 'react';
 
 export const SearchContext = createContext();
 
-const BASE_URl = "https://api.themoviedb.org/3/search/movie";
+const BASE_URl =
+  'https://api.themoviedb.org/3/search/movie';
+
+// Get API key from environment variable
+const API_KEY =
+  process.env.EXPO_PUBLIC_TMDB_API_KEY;
+
+if (!API_KEY) {
+  console.warn(
+    'TMDB API key is not set. Please set EXPO_PUBLIC_TMDB_API_KEY in your .env file'
+  );
+}
+
 const options = {
-  method: "GET",
+  method: 'GET',
   headers: {
-    accept: "application/json",
-    Authorization:
-      "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIxZDU4YzYyZmQ3OTk1YTI3NDkzOTgxZWFmNmU2M2U5NiIsIm5iZiI6MTcxMDc5ODMxMi4yNDYsInN1YiI6IjY1ZjhiNWU4MzdiM2E5MDE2NGNjNjJhMSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.pg2C0LVfMH3NvoqluNPJEtSiLkeJuNtZ4NxpBxNDao4",
+    accept: 'application/json',
+    Authorization: `Bearer ${API_KEY}`,
   },
 };
 
@@ -17,21 +32,27 @@ export function useSearch() {
   const context = useContext(SearchContext);
 
   if (!context) {
-    throw new Error("useSearch must be used within a SearchProvider");
+    throw new Error(
+      'useSearch must be used within a SearchProvider'
+    );
   }
 
   return context;
 }
 
 export function SearchProvider({ children }) {
-  const [moviesData, setMoviesData] = useState([]);
+  const [moviesData, setMoviesData] = useState(
+    []
+  );
   const [loading, setLoading] = useState(false);
   const [notFound, setNotFound] = useState(false);
+  const [error, setError] = useState(false);
 
   //fetching movies and saving in array moviesData
   async function fetchMovies(query) {
     try {
       setLoading(true);
+      setError(false);
       const response = await fetch(
         `${BASE_URl}?query=${query}&include_adult=false&language=en-US&page=1`,
         options
@@ -44,15 +65,23 @@ export function SearchProvider({ children }) {
       setNotFound(data.results.length === 0); // it will be use in home screen to display message if there is no search results
     } catch (err) {
       console.log(err);
+      setError(true);
     } finally {
       setLoading(false);
     }
   }
 
+  // function to clear error state
+  function clearError() {
+    setError(false);
+  }
+
   // removing the movie from array moviesData based on id of movie
   function removeMovieFromSearchList(id) {
     setMoviesData((prevMovieData) =>
-      prevMovieData.filter((item) => item.id != id)
+      prevMovieData.filter(
+        (item) => item.id !== id
+      )
     );
   }
 
@@ -64,6 +93,8 @@ export function SearchProvider({ children }) {
         removeMovieFromSearchList,
         loading,
         notFound,
+        error,
+        clearError,
       }}
     >
       {children}
